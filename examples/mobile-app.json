@@ -1,0 +1,214 @@
+{
+  "id": "proj-mr3u5zd9-22",
+  "name": "Example 1 — Mobile App v1.0",
+  "startDate": "2026-08-03",
+  "indirectPerDay": 2000,
+  "coordinationPenalty": 0.2,
+  "workdays": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "holidays": [],
+  "resources": [
+    {
+      "id": "r-mr3u5zd9-1",
+      "name": "Engineer",
+      "costPerDay": 700,
+      "capacity": 6
+    },
+    {
+      "id": "r-mr3u5zd9-2",
+      "name": "Designer",
+      "costPerDay": 650,
+      "capacity": 2
+    },
+    {
+      "id": "r-mr3u5zd9-3",
+      "name": "QA",
+      "costPerDay": 550,
+      "capacity": 3
+    },
+    {
+      "id": "r-mr3u5zd9-4",
+      "name": "PM",
+      "costPerDay": 850,
+      "capacity": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t-mr3u5zd9-5",
+      "name": "Requirements & kickoff",
+      "description": "Scope, user stories, sign-off",
+      "work": 4,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-4",
+      "units": 1,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-6",
+      "name": "UX design",
+      "description": "Wireframes + high-fidelity screens",
+      "work": 10,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-2",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-7",
+      "name": "Backend services",
+      "description": "API, data model, auth",
+      "work": 24,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-1",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-8",
+      "name": "iOS app",
+      "description": "Native iOS client",
+      "work": 20,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-1",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-9",
+      "name": "Android app",
+      "description": "Native Android client",
+      "work": 20,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-1",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-10",
+      "name": "Integration",
+      "description": "Wire clients to backend",
+      "work": 8,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-1",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-11",
+      "name": "QA & bug-fix",
+      "description": "Full regression + fixes",
+      "work": 12,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-3",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-12",
+      "name": "Launch",
+      "description": "Store submission & go-live",
+      "work": 3,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-4",
+      "units": 1,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "d-mr3u5zd9-13",
+      "from": "t-mr3u5zd9-5",
+      "to": "t-mr3u5zd9-6",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-14",
+      "from": "t-mr3u5zd9-5",
+      "to": "t-mr3u5zd9-7",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-15",
+      "from": "t-mr3u5zd9-6",
+      "to": "t-mr3u5zd9-8",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-16",
+      "from": "t-mr3u5zd9-6",
+      "to": "t-mr3u5zd9-9",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-17",
+      "from": "t-mr3u5zd9-7",
+      "to": "t-mr3u5zd9-10",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-18",
+      "from": "t-mr3u5zd9-8",
+      "to": "t-mr3u5zd9-10",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-19",
+      "from": "t-mr3u5zd9-9",
+      "to": "t-mr3u5zd9-10",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-20",
+      "from": "t-mr3u5zd9-10",
+      "to": "t-mr3u5zd9-11",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-21",
+      "from": "t-mr3u5zd9-11",
+      "to": "t-mr3u5zd9-12",
+      "type": "FS",
+      "lag": 0
+    }
+  ]
+}

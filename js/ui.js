@@ -318,6 +318,25 @@
         renderProjectList(list);
       });
       body.appendChild(addBtn);
+
+      // Example projects (great for the tutorial).
+      if (GA.examples && GA.examples.length) {
+        body.appendChild(el('h3', 'sub', 'Load an example'));
+        body.appendChild(el('p', 'muted', 'Loads a ready-made teaching project as a new copy — your other projects are untouched.'));
+        GA.examples.forEach(function (ex) {
+          var row = el('div', 'example-row');
+          row.innerHTML = '<div><b>' + esc(ex.title) + '</b><span class="ex-teaches">' + esc(ex.teaches) + '</span></div>';
+          var btn = el('button', 'btn small', 'Load');
+          btn.addEventListener('click', function () {
+            GA.store.importProject(app.workspace, ex.build());
+            app.persist();
+            app.refresh();
+            renderProjectList(list);
+          });
+          row.appendChild(btn);
+          body.appendChild(row);
+        });
+      }
     });
   }
 
@@ -385,6 +404,11 @@
       var indI = input('number', p.indirectPerDay || 0, { min: '0', step: '100' });
       body.appendChild(field('Indirect cost / day (overhead)', indI));
 
+      var penI = input('number', Math.round((p.coordinationPenalty == null ? 0.20 : p.coordinationPenalty) * 100), { min: '0', max: '100', step: '5' });
+      var penField = field('Coordination overhead % (per extra unit)', penI);
+      penField.appendChild(el('span', 'field-hint', 'Extra people on a task add this % to its cost — why crashing costs money.'));
+      body.appendChild(penField);
+
       body.appendChild(el('h3', 'sub', 'Working days'));
       var dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       var wd = el('div', 'weekday-row');
@@ -406,6 +430,7 @@
         p.name = nameI.value.trim() || 'Project';
         p.startDate = startI.value || p.startDate;
         p.indirectPerDay = Math.max(0, +indI.value || 0);
+        p.coordinationPenalty = Math.max(0, Math.min(1, (+penI.value || 0) / 100));
         p.workdays = checks.map(function (c) { return c.checked; });
         app.persist();
         app.refresh();

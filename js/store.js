@@ -132,6 +132,7 @@
       name: name,
       startDate: todayStr(),
       indirectPerDay: 0,
+      coordinationPenalty: 0.20,
       workdays: [false, true, true, true, true, true, false],
       holidays: [],
       resources: [
@@ -165,6 +166,7 @@
     p.workdays = p.workdays || [false, true, true, true, true, true, false];
     p.holidays = p.holidays || [];
     p.indirectPerDay = p.indirectPerDay || 0;
+    if (p.coordinationPenalty == null) p.coordinationPenalty = 0.20;
     p.tasks.forEach(function (t) {
       t.assignments = t.assignments || [];
       if (t.units == null) t.units = 1;
@@ -205,6 +207,7 @@
       name: 'Sample Product Launch',
       startDate: todayStr(),
       indirectPerDay: 1500,
+      coordinationPenalty: 0.20,
       workdays: [false, true, true, true, true, true, false],
       holidays: [],
       resources: [r.dev, r.design, r.qa, r.pm],

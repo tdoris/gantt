@@ -1,0 +1,221 @@
+{
+  "id": "proj-mr3u5zd9-66",
+  "name": "Example 3 — Conference 2026",
+  "startDate": "2026-10-01",
+  "indirectPerDay": 900,
+  "coordinationPenalty": 0.2,
+  "workdays": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "holidays": [],
+  "resources": [
+    {
+      "id": "r-mr3u5zd9-44",
+      "name": "Coordinator",
+      "costPerDay": 500,
+      "capacity": 3
+    },
+    {
+      "id": "r-mr3u5zd9-45",
+      "name": "Marketing",
+      "costPerDay": 450,
+      "capacity": 3
+    },
+    {
+      "id": "r-mr3u5zd9-46",
+      "name": "Ops",
+      "costPerDay": 400,
+      "capacity": 4
+    },
+    {
+      "id": "r-mr3u5zd9-47",
+      "name": "Sponsor Mgr",
+      "costPerDay": 600,
+      "capacity": 2
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t-mr3u5zd9-48",
+      "name": "Venue booking",
+      "description": "Shortlist, negotiate, book",
+      "work": 8,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-44",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-49",
+      "name": "Program & speakers",
+      "description": "Curate talks, confirm speakers",
+      "work": 18,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-44",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-50",
+      "name": "Sponsorship sales",
+      "description": "Prospect & close sponsors",
+      "work": 20,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-47",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-51",
+      "name": "Marketing campaign",
+      "description": "Site, ads, email, social",
+      "work": 16,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-45",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-52",
+      "name": "Registration & ticketing",
+      "description": "Platform + attendee flow",
+      "work": 8,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-46",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-53",
+      "name": "Logistics & catering",
+      "description": "AV, catering, signage, staffing",
+      "work": 14,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-46",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-54",
+      "name": "Run of show & rehearsal",
+      "description": "Final schedule, dry run",
+      "work": 6,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-44",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-55",
+      "name": "Event day",
+      "description": "Deliver the conference",
+      "work": 3,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-46",
+      "units": 3,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "d-mr3u5zd9-56",
+      "from": "t-mr3u5zd9-48",
+      "to": "t-mr3u5zd9-49",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-57",
+      "from": "t-mr3u5zd9-48",
+      "to": "t-mr3u5zd9-50",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-58",
+      "from": "t-mr3u5zd9-49",
+      "to": "t-mr3u5zd9-51",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-59",
+      "from": "t-mr3u5zd9-50",
+      "to": "t-mr3u5zd9-51",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-60",
+      "from": "t-mr3u5zd9-51",
+      "to": "t-mr3u5zd9-52",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-61",
+      "from": "t-mr3u5zd9-49",
+      "to": "t-mr3u5zd9-53",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-62",
+      "from": "t-mr3u5zd9-48",
+      "to": "t-mr3u5zd9-53",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-63",
+      "from": "t-mr3u5zd9-52",
+      "to": "t-mr3u5zd9-54",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-64",
+      "from": "t-mr3u5zd9-53",
+      "to": "t-mr3u5zd9-54",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-65",
+      "from": "t-mr3u5zd9-54",
+      "to": "t-mr3u5zd9-55",
+      "type": "FS",
+      "lag": 0
+    }
+  ]
+}

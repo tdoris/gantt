@@ -1,0 +1,207 @@
+{
+  "id": "proj-mr3u5zd9-43",
+  "name": "Example 2 — Office Relocation",
+  "startDate": "2026-09-01",
+  "indirectPerDay": 1000,
+  "coordinationPenalty": 0.2,
+  "workdays": [
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false
+  ],
+  "holidays": [],
+  "resources": [
+    {
+      "id": "r-mr3u5zd9-23",
+      "name": "Facilities Lead",
+      "costPerDay": 550,
+      "capacity": 1
+    },
+    {
+      "id": "r-mr3u5zd9-24",
+      "name": "Movers",
+      "costPerDay": 300,
+      "capacity": 6
+    },
+    {
+      "id": "r-mr3u5zd9-25",
+      "name": "IT Tech",
+      "costPerDay": 600,
+      "capacity": 2
+    },
+    {
+      "id": "r-mr3u5zd9-26",
+      "name": "PM",
+      "costPerDay": 800,
+      "capacity": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t-mr3u5zd9-27",
+      "name": "Site selection & lease",
+      "description": "Choose site, sign lease",
+      "work": 6,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-26",
+      "units": 1,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-28",
+      "name": "Floor plan & fit-out design",
+      "description": "Layout, desks, meeting rooms",
+      "work": 8,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-23",
+      "units": 1,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-29",
+      "name": "Vendor negotiations",
+      "description": "Furniture + build contractors",
+      "work": 6,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-23",
+      "units": 1,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-30",
+      "name": "Furniture delivery",
+      "description": "Order → delivery lead time",
+      "work": 3,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-24",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-31",
+      "name": "IT infrastructure",
+      "description": "Network, cabling, servers",
+      "work": 12,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-25",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-32",
+      "name": "Physical move",
+      "description": "Relocate people & equipment",
+      "work": 10,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-24",
+      "units": 5,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-33",
+      "name": "Workstation setup",
+      "description": "Provision desks & devices",
+      "work": 8,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-25",
+      "units": 2,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    },
+    {
+      "id": "t-mr3u5zd9-34",
+      "name": "On-site onboarding",
+      "description": "Orientation at new office",
+      "work": 4,
+      "duration": null,
+      "resourceId": "r-mr3u5zd9-26",
+      "units": 1,
+      "maxUnits": null,
+      "assignments": [],
+      "progress": 0,
+      "constraintStart": null
+    }
+  ],
+  "dependencies": [
+    {
+      "id": "d-mr3u5zd9-35",
+      "from": "t-mr3u5zd9-27",
+      "to": "t-mr3u5zd9-28",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-36",
+      "from": "t-mr3u5zd9-27",
+      "to": "t-mr3u5zd9-29",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-37",
+      "from": "t-mr3u5zd9-28",
+      "to": "t-mr3u5zd9-31",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-38",
+      "from": "t-mr3u5zd9-29",
+      "to": "t-mr3u5zd9-30",
+      "type": "FS",
+      "lag": 8
+    },
+    {
+      "id": "d-mr3u5zd9-39",
+      "from": "t-mr3u5zd9-31",
+      "to": "t-mr3u5zd9-33",
+      "type": "SS",
+      "lag": 2
+    },
+    {
+      "id": "d-mr3u5zd9-40",
+      "from": "t-mr3u5zd9-30",
+      "to": "t-mr3u5zd9-32",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-41",
+      "from": "t-mr3u5zd9-33",
+      "to": "t-mr3u5zd9-32",
+      "type": "FS",
+      "lag": 0
+    },
+    {
+      "id": "d-mr3u5zd9-42",
+      "from": "t-mr3u5zd9-32",
+      "to": "t-mr3u5zd9-34",
+      "type": "FS",
+      "lag": 0
+    }
+  ]
+}

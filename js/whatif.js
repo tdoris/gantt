@@ -13,28 +13,42 @@
 
   // ---- Costing ------------------------------------------------------------
 
-  // Direct cost of a single task = for each assignment, units * duration(days)
-  // * resource.costPerDay. The driving assignment's units also set duration.
-  function taskDirectCost(task, sched, resourcesById) {
-    var r = sched.tasks[task.id];
-    var dur = r ? r.duration : GA.scheduler.computeDuration(task);
+  // Default coordination overhead: each extra unit on a task adds 20% to that
+  // task's labour cost (communication overhead / diminishing returns — the
+  // reason crashing costs money). Overridable per project.
+  var DEFAULT_PENALTY = 0.20;
+
+  function penaltyOf(project) {
+    return project.coordinationPenalty == null ? DEFAULT_PENALTY : project.coordinationPenalty;
+  }
+
+  // Labour cost of a task given an explicit calendar duration and driver units.
+  // Driver cost carries the coordination penalty; extra assignments do not.
+  function taskCostWith(task, resById, penalty, dur, units) {
     var cost = 0;
-    // Driving resource.
-    var driver = resourcesById[task.resourceId];
-    if (driver) cost += (task.units || 1) * dur * driver.costPerDay;
-    // Extra ("along for the ride") assignments.
+    var driver = resById[task.resourceId];
+    if (driver) cost += units * dur * driver.costPerDay * (1 + penalty * (units - 1));
     (task.assignments || []).forEach(function (a) {
-      var res = resourcesById[a.resourceId];
+      var res = resById[a.resourceId];
       if (res) cost += (a.units || 1) * dur * res.costPerDay;
     });
     return cost;
   }
 
+  // Direct cost of a single task at its scheduled duration.
+  function taskDirectCost(task, sched, resourcesById, penalty) {
+    if (penalty == null) penalty = DEFAULT_PENALTY;
+    var r = sched.tasks[task.id];
+    var dur = r ? r.duration : GA.scheduler.computeDuration(task);
+    return taskCostWith(task, resourcesById, penalty, dur, task.units || 1);
+  }
+
   function summarizeCost(project, sched) {
     var resById = index(project.resources);
+    var penalty = penaltyOf(project);
     var direct = 0;
     project.tasks.forEach(function (t) {
-      direct += taskDirectCost(t, sched, resById);
+      direct += taskDirectCost(t, sched, resById, penalty);
     });
     var durationDays = sched.projectFinish;
     var indirect = (project.indirectPerDay || 0) * durationDays;
@@ -113,6 +127,7 @@
       return { error: 'Cannot analyze: dependency cycle.', };
     }
 
+    var penalty = penaltyOf(work);
     var steps = [];
     var guard = 0;
     var sched = baseSched;
@@ -127,20 +142,22 @@
         if ((t.units || 1) >= maxUnits) return; // already at crash limit
         // Marginal effect: adding a unit shortens this task by:
         var curDur = r.duration;
-        var newUnits = (t.units || 1) + 1;
+        var curUnits = t.units || 1;
+        var newUnits = curUnits + 1;
         var newDur = t.work != null
           ? Math.max(1, Math.ceil(t.work / newUnits))
           : curDur; // fixed-duration tasks can't be crashed
         var saved = curDur - newDur;
         if (saved <= 0) return;
-        var res = resById[t.resourceId];
-        var marginalCost = res ? res.costPerDay * newDur : 0; // extra unit over new duration
+        // Real marginal labour cost (includes the coordination premium).
+        var marginalCost = taskCostWith(t, resById, penalty, newDur, newUnits) -
+                           taskCostWith(t, resById, penalty, curDur, curUnits);
         var costPerDaySaved = marginalCost / saved;
         if (!best || costPerDaySaved < best.costPerDaySaved) {
           best = {
             taskId: t.id, taskName: t.name, saved: saved,
             costPerDaySaved: costPerDaySaved, resourceId: t.resourceId,
-            fromUnits: t.units || 1, toUnits: newUnits,
+            fromUnits: curUnits, toUnits: newUnits,
           };
         }
       });
@@ -232,6 +249,7 @@
   function crashToFinishIndex(project, calendar, targetFinish) {
     var work = cloneProject(project);
     var resById = index(work.resources);
+    var penalty = penaltyOf(work);
     var sched = GA.scheduler.schedule(work, calendar);
     var guard = 0;
     while (sched.projectFinish > targetFinish && guard++ < 1000) {
@@ -240,13 +258,14 @@
         var r = sched.tasks[t.id];
         if (!r || !r.critical) return;
         var maxUnits = crashLimit(t, resById);
-        if ((t.units || 1) >= maxUnits) return;
-        var newUnits = (t.units || 1) + 1;
+        var curUnits = t.units || 1;
+        if (curUnits >= maxUnits) return;
+        var newUnits = curUnits + 1;
         var newDur = t.work != null ? Math.max(1, Math.ceil(t.work / newUnits)) : r.duration;
         var saved = r.duration - newDur;
         if (saved <= 0) return;
-        var res = resById[t.resourceId];
-        var marginalCost = res ? res.costPerDay * newDur : 0;
+        var marginalCost = taskCostWith(t, resById, penalty, newDur, newUnits) -
+                           taskCostWith(t, resById, penalty, r.duration, curUnits);
         var cps = marginalCost / saved;
         if (!best || cps < best.cps) best = { id: t.id, toUnits: newUnits, cps: cps };
       });
