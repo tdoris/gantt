@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gantt · Project Planner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">▦</span>
+      <span>Gantt Planner</span>
+    </div>
+    <div class="toolbar">
+      <select id="project-select" class="project-select" title="Switch project"></select>
+      <button id="btn-projects" class="btn" title="Manage projects">Projects</button>
+      <span class="divider"></span>
+      <button id="btn-add-task" class="btn primary">+ Task</button>
+      <button id="btn-resources" class="btn">Resources</button>
+      <button id="btn-whatif" class="btn accent">What-if</button>
+      <button id="btn-settings" class="btn">Settings</button>
+      <span class="spacer"></span>
+      <button id="btn-import" class="btn ghost">Import</button>
+      <button id="btn-export" class="btn ghost">Export</button>
+      <button id="btn-reset" class="btn ghost">Reset</button>
+      <input type="file" id="import-file" accept="application/json" hidden />
+    </div>
+  </header>
+
+  <div id="statusbar" class="statusbar"></div>
+
+  <main id="gantt" class="gantt"></main>
+
+  <footer class="legend">
+    <span><i class="sw bar"></i>Task</span>
+    <span><i class="sw critical"></i>Critical path</span>
+    <span><i class="sw slack"></i>Slack</span>
+    <span><i class="sw today"></i>Today</span>
+    <span><i class="sw deadline"></i>Deadline</span>
+    <span class="hint">Click a task bar or name to edit · dashed arrows = non-FS dependencies</span>
+  </footer>
+
+  <script src="js/calendar.js"></script>
+  <script src="js/scheduler.js"></script>
+  <script src="js/whatif.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/gantt.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
