@@ -17,11 +17,12 @@ Your projects auto-save to the browser's `localStorage`. Use the **project
 switcher** (top-left) and **Projects** button to keep many projects, and
 **Export / Import** to move a single project as a JSON file.
 
-**New here?** Read the **[TUTORIAL.md](TUTORIAL.md)** — a full walkthrough of
-every feature (critical path, crashing, resource modeling, cost-vs-time
-optimization) built around three loadable example projects. In the app, click
-**Projects → Load an example** to follow along. The examples also live as shareable
-JSON in [`examples/`](examples/).
+**New here?** Click the **📘 Tutorial** button in the app (top-right) to read the
+full guide in-app, or see **[TUTORIAL.md](TUTORIAL.md)** — a walkthrough of every
+feature (critical path, crashing, resource modeling, cost-vs-time optimization)
+built around three loadable example projects. In the app, click **Projects → Load
+an example** to follow along. The examples also live as shareable JSON in
+[`examples/`](examples/).
 
 **Hosting / sharing:** see [DEPLOY.md](DEPLOY.md) for one-click GitHub Pages
 deployment. Each visitor keeps their own projects in their own browser; share a

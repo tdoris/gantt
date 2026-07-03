@@ -138,6 +138,9 @@
       app.refresh();
       GA.ui.editTask(t.id);
     });
+    document.getElementById('btn-tutorial').addEventListener('click', function () { GA.tutorial.open(); });
+    var linkTut = document.getElementById('link-tutorial');
+    if (linkTut) linkTut.addEventListener('click', function (e) { e.preventDefault(); GA.tutorial.open(); });
     document.getElementById('btn-resources').addEventListener('click', GA.ui.openResources);
     document.getElementById('btn-settings').addEventListener('click', GA.ui.openSettings);
     document.getElementById('btn-whatif').addEventListener('click', GA.ui.openWhatIf);
